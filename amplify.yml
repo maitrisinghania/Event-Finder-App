@@ -3,6 +3,10 @@ frontend:
   phases:
     preBuild:
       commands:
+        - pwd  # Debug: see current directory
+        - ls -la  # Debug: list files
+        - cd /codebuild/output/src*/src/Event-Finder-App  # Go to root
+        - ls -la  # Debug: verify we're in correct directory
         - cd client
         - npm ci
     build:
@@ -21,6 +25,7 @@ backend:
   phases:
     build:
       commands:
+        - cd /codebuild/output/src*/src/Event-Finder-App  # Go to root
         - cd server
         - npm ci
     start:
