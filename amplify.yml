@@ -8,7 +8,7 @@ frontend:
         - npm run build
         - cd ..
   artifacts:
-    baseDirectory: server/client/build
+    baseDirectory: client/build
     files:
       - "**/*"
   cache:
