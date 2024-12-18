@@ -6,11 +6,19 @@ frontend:
         - echo "No pre-build step required"
     build:
       commands:
-        - echo "No build step required"
+        - echo "Building frontend using Express"
+        - npm install  # Install dependencies (including Express)
+        - node index.js  # Start the server to serve the static files
   artifacts:
-    baseDirectory: build  # This is the folder where the built frontend files are
+    baseDirectory: build  # The folder containing the built frontend assets
     files:
       - '**/*'  # Include all files in the build folder
   cache:
     paths:
-      - node_modules/**/*  # This can be left out if you don't have node_modules in this repo
+      - node_modules/**/*  # Cache node_modules for faster subsequent builds
+
+backend:
+  phases:
+    build:
+      commands:
+        - echo "No backend build required"
