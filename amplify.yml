@@ -1,4 +1,3 @@
-version: 1
 frontend:
   phases:
     build:
@@ -8,20 +7,5 @@ frontend:
         - npm run build
     postBuild:
       commands:
-        - echo "Running post-build"
-        # If you need to modify headers or add custom CORS settings, you could add commands here.
-        # For example, you could add a script to modify headers for static files.
-        - |
-          if [ -f ./build/manifest.json ]; then
-            echo "Customizing headers"
-            # Example: Adding a custom header to the build folder
-            echo '{"headers":[{"source":"/*","headers":[{"key":"Access-Control-Allow-Origin","value":"*"}]}]}' > ./build/_headers
-          fi
-  artifacts:
-    baseDirectory: /build
-    files:
-      - '**/*'
-  cache:
-    paths:
-      - node_modules/**/*
-
+        - echo "Setting up proxy configuration"
+        - echo 'module.exports = { "/api/*": { "target": "http://Eventfinder-backend-env.eba-hsvjafpy.us-east-1.elasticbeanstalk.com", "secure": false } }' > ./src/setupProxy.js
