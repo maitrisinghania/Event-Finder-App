@@ -1,15 +1,24 @@
 version: 1
-frontend:
+backend:
   phases:
     preBuild:
       commands:
+        # Build frontend first
+        - ls -la  # Debug: List files to verify structure
         - cd client
+        - npm ci
+        - npm run build
+        - mkdir -p ../server/build
+        - cp -r build/* ../server/build/
+        # Then setup backend
+        - cd ../server
         - npm ci
     build:
       commands:
-        - npm run build
-        # Copy build files to server's public directory
-        - cp -r build ../server/
+        - echo "Backend build phase"
+    start:
+      commands:
+        - node server.js
   artifacts:
     baseDirectory: server
     files:
@@ -18,12 +27,3 @@ frontend:
     paths:
       - client/node_modules/**/*
       - server/node_modules/**/*
-backend:
-  phases:
-    build:
-      commands:
-        - cd server
-        - npm ci
-    start:
-      commands:
-        - node server.js
