@@ -3,31 +3,31 @@ frontend:
   phases:
     preBuild:
       commands:
-        - pwd  # Debug: see current directory
-        - ls -la  # Debug: list files
-        - cd /codebuild/output/src*/src/Event-Finder-App  # Go to root
-        - ls -la  # Debug: verify we're in correct directory
-        - cd client
-        - npm ci
+        - pwd  # Debug: Check current directory
+        - ls -la  # Debug: List files in the current directory
+        - cd /codebuild/output/src*/src/Event-Finder-App  # Navigate to project root
+        - ls -la  # Debug: Verify directory contents
+        - cd client  # Navigate to frontend directory
+        - npm ci  # Install frontend dependencies
     build:
       commands:
-        - npm run build
-        - mkdir -p ../server/build
-        - cp -r build/* ../server/build/
+        - npm run build  # Build the frontend
+        - mkdir -p ../server/build  # Create the build folder in the backend
+        - cp -r build/* ../server/build/  # Copy the built files to the backend folder
   artifacts:
-    baseDirectory: server
+    baseDirectory: server  # Set the backend folder as the base directory
     files:
-      - '**/*'
+      - '**/*'  # Include all files
   cache:
     paths:
-      - client/node_modules/**/*
+      - client/node_modules/**/*  # Cache frontend dependencies
 backend:
   phases:
     build:
       commands:
-        - cd /codebuild/output/src*/src/Event-Finder-App  # Go to root
-        - cd server
-        - npm ci
-    start:
-      commands:
-        - node server.js
+        - cd /codebuild/output/src*/src/Event-Finder-App  # Navigate to project root
+        - cd server  # Navigate to backend directory
+        - npm ci  # Install backend dependencies
+phases:
+  start:
+    command: "node server/server.js"  # Start the backend server
