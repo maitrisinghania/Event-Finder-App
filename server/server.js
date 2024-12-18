@@ -14,8 +14,8 @@ app.use(express.static(path.resolve(__dirname, './build')));
 
 
 var spotifyApi = new SpotifyWebApi({
-    clientId: process.env.SPOTIFY_CLIENT_ID,
-    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    clientId: "3ad3347fd88c44509499085b428ae7af",
+    clientSecret: "bc02a3791804498ab36246aff65a4586",
 });
 
 
@@ -39,7 +39,7 @@ app.get('/suggest', async (req, res) => {
         let keyword = req.query.keyword
         const response = await axios.get('https://app.ticketmaster.com/discovery/v2/suggest', {
             params: {
-                apikey: process.env.TICKETMASTER_API_KEY,
+                apikey: "tl9YgQAGCVrRhB9RGEJCjae9oIMtImav",
                 keyword: keyword
             }
         }
@@ -67,7 +67,7 @@ app.get("/events", async (req, res) => {
         console.log(keyword, segmentId, radius, geopoint)
         const response = await axios.get('https://app.ticketmaster.com/discovery/v2/events.json', {
             params: {
-                apikey: process.env.TICKETMASTER_API_KEY,
+                apikey: "tl9YgQAGCVrRhB9RGEJCjae9oIMtImav",
                 keyword: keyword, segmentId: segmentId, radius: radius, geoPoint: geopoint, unit: "miles"
             }
         }
@@ -87,7 +87,7 @@ app.get('/event_details', async (req, res) => {
         console.log("entered details: event id: ", event_id)
         const response = await axios.get(`https://app.ticketmaster.com/discovery/v2/events/${event_id}`, {
             params: {
-                apikey: process.env.TICKETMASTER_API_KEY
+                apikey: "tl9YgQAGCVrRhB9RGEJCjae9oIMtImav"
             }
         });
         console.log("backend details results", response.data);
@@ -106,7 +106,7 @@ app.get('/venue_details', async (req, res) => {
     try {
         let venue_name = req.query.keyword;
         console.log("venue:", req.query)
-        var url = `https://app.ticketmaster.com/discovery/v2/venues.json?keyword=${venue_name}&apikey=${process.env.TICKETMASTER_API_KEY}`;
+        var url = `https://app.ticketmaster.com/discovery/v2/venues.json?keyword=${venue_name}&apikey=tl9YgQAGCVrRhB9RGEJCjae9oIMtImav`;
         console.log("url venue:", url)
         // let venue_name = 'Walt Disney Concert Hall'
         console.log("entered venue:", venue_name);
