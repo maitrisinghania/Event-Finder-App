@@ -15,7 +15,7 @@ frontend:
         - mkdir -p ../server/build  # Create the build folder in the backend
         - cp -r build/* ../server/build/  # Copy the built files to the backend folder
   artifacts:
-    baseDirectory: server  # Set the backend folder as the base directory
+    baseDirectory: server/build  # Set the backend folder as the base directory
     files:
       - '**/*'  # Include all files
   cache:
