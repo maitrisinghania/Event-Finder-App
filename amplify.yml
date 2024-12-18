@@ -1,30 +1,29 @@
 version: 1
-applications:
-  - frontend:
-      phases:
-        preBuild:
-          commands:
-            - cd client
-            - npm ci
-        build:
-          commands:
-            - npm run build
-            # Copy the built frontend files to where backend expects them
-            - cp -r build/* ../server/public/
-      artifacts:
-        baseDirectory: server
-        files:
-          - '**/*'
-      cache:
-        paths:
-          - client/node_modules/**/*
-          - server/node_modules/**/*
-  - backend:
-      phases:
-        build:
-          commands:
-            - cd server
-            - npm ci
-        start:
-          commands:
-            - node server.js
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - cd client
+        - npm ci
+    build:
+      commands:
+        - npm run build
+        # Copy build files to server's public directory
+        - cp -r build/* ../server/public/
+  artifacts:
+    baseDirectory: server
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - client/node_modules/**/*
+      - server/node_modules/**/*
+backend:
+  phases:
+    build:
+      commands:
+        - cd server
+        - npm ci
+    start:
+      commands:
+        - node server.js
