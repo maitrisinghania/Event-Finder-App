@@ -9,7 +9,7 @@ frontend:
       commands:
         - npm run build
         # Copy build files to server's public directory
-        - cp -r build/* ../server/public/
+        - cp -r build ../server/
   artifacts:
     baseDirectory: server
     files:
