@@ -1,0 +1,16 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "No pre-build step required"
+    build:
+      commands:
+        - echo "No build step required"
+  artifacts:
+    baseDirectory: build  # This is the folder where the built frontend files are
+    files:
+      - '**/*'  # Include all files in the build folder
+  cache:
+    paths:
+      - node_modules/**/*  # This can be left out if you don't have node_modules in this repo
