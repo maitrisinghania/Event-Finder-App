@@ -20,5 +20,5 @@ backend:
       commands:
         - cd server
         - npm install
-  start:
-    command: "node server.js"
+    start:
+      command: "cd server && node server.js"
